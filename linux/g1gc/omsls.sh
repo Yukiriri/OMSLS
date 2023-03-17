@@ -51,10 +51,11 @@ arg+="-XX:SurvivorRatio=32 "
 arg+="--add-modules=jdk.incubator.vector "
 arg+="-XX:MaxInlineSize=480 "
 
-arg+="-XX:+CrashOnOutOfMemoryError "
 arg+="-Xlog:async "
 arg+="-Xlog:gc:logs/g1gc-%t.log "
+arg+="-XX:+CrashOnOutOfMemoryError "
+arg+="-Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true"
 arg+="-Djava.awt.headless=true "
 arg+="-Dfile.encoding=utf-8 "
 
-java -server $arg -jar $1 nogui
+java -server $arg -jar $1 --nogui

@@ -33,10 +33,11 @@ set arg=%arg% -XX:ZUncommitDelay=15
 set arg=%arg% --add-modules=jdk.incubator.vector
 set arg=%arg% -XX:MaxInlineSize=480
 
-set arg=%arg% -XX:+CrashOnOutOfMemoryError
 set arg=%arg% -Xlog:async
 set arg=%arg% -Xlog:gc:logs/zgc-%t.log
+set arg=%arg% -XX:+CrashOnOutOfMemoryError
+set arg=%arg% -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true
 set arg=%arg% -Djava.awt.headless=true
 set arg=%arg% -Dfile.encoding=utf-8
 
-java -server %arg% -jar %1 nogui
+java -server %arg% -jar %1 --nogui
