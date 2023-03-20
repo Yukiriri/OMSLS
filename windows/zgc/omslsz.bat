@@ -16,8 +16,8 @@ set mem_amount=%mem_unit:~0,-1%
 set mem_unit=%mem_unit:~-1%
 
 set is_more_than=0
-if /i "%mem_unit%" == "G" if %mem_amount% GTR 12    set is_more_than=1
-if /i "%mem_unit%" == "M" if %mem_amount% GTR 12000 set is_more_than=1
+if /i "%mem_unit%" == "G" if %mem_amount% GTR 8    set is_more_than=1
+if /i "%mem_unit%" == "M" if %mem_amount% GTR 8000 set is_more_than=1
 if %is_more_than% == 1 (
   set arg=%arg% -XX:ReservedCodeCacheSize=1G
 )
@@ -36,7 +36,6 @@ set arg=%arg% -XX:MaxInlineSize=480
 set arg=%arg% -Xlog:async
 set arg=%arg% -Xlog:gc:logs/zgc-%t.log
 set arg=%arg% -XX:+CrashOnOutOfMemoryError
-set arg=%arg% -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true
 set arg=%arg% -Djava.awt.headless=true
 set arg=%arg% -Dfile.encoding=utf-8
 

@@ -34,7 +34,6 @@ arg+="-XX:MaxInlineSize=480 "
 arg+="-Xlog:async "
 arg+="-Xlog:gc:logs/zgc-%t.log "
 arg+="-XX:+CrashOnOutOfMemoryError "
-arg+="-Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true"
 arg+="-Djava.awt.headless=true "
 arg+="-Dfile.encoding=utf-8 "
 
