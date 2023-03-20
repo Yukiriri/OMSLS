@@ -8,8 +8,8 @@ if "%3" NEQ "" (
   set arg=%arg% -Xms%2
 )
 
-if "$3" == ""   set arg=%arg% -XX:+UseTransparentHugePages
-if "$3" == "$2" set arg=%arg% -XX:+UseTransparentHugePages
+if "$3" == ""   set arg=%arg% -XX:+UseLargePages
+if "$3" == "$2" set arg=%arg% -XX:+UseLargePages
 
 set mem_unit=%2
 set mem_amount=%mem_unit:~0,-1%
