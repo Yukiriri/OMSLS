@@ -7,7 +7,6 @@
 -XX:G1MixedGCLiveThresholdPercent=90
 -XX:MaxTenuringThreshold=1
 -XX:SurvivorRatio=32
--XX:-UseAdaptiveSizePolicy
 
 -XX:G1NewSizePercent=30
 -XX:G1MaxNewSizePercent=40

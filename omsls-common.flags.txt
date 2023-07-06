@@ -1,7 +1,6 @@
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
 -XX:+PerfDisableSharedMem
--XX:+UseLargePages
 -XX:+UseNUMA
 -XX:MaxInlineSize=480
 -XX:ReservedCodeCacheSize=512M
