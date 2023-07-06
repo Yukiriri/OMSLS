@@ -1,0 +1,4 @@
+-XX:+UseShenandoahGC
+-XX:+UnlockExperimentalVMOptions
+-XX:ShenandoahGuaranteedGCInterval=7000
+-XX:ShenandoahUncommitDelay=21000
