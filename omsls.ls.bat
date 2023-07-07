@@ -2,6 +2,6 @@
 ::bat arg: <jar> <Xmx> [Xms]
 ::env arg: [custom_java_path] [preset_java_version]
 
-set yggdrasil_flags=@%~dp0\yggdrasil.flags.txt
+set yggdrasil_flags=@%~dp0\flags\yggdrasil.txt
 
 omsls.bat %1 %2 %3
