@@ -1,5 +1,2 @@
 -XX:+UseZGC
 -XX:+UnlockExperimentalVMOptions
--XX:ZCollectionInterval=10
--XX:ZUncommitDelay=30
--XX:-ZProactive
