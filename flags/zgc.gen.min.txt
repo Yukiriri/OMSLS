@@ -3,3 +3,4 @@
 -XX:ZCollectionInterval=60
 -XX:ZUncommitDelay=60
 -XX:-ZProactive
+-XX:+UseNUMA

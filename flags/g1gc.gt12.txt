@@ -7,11 +7,13 @@
 -XX:G1MixedGCLiveThresholdPercent=90
 -XX:MaxTenuringThreshold=1
 -XX:SurvivorRatio=32
--XX:-UseAdaptiveSizePolicy
--XX:+UseNUMA
 
 -XX:G1NewSizePercent=40
 -XX:G1MaxNewSizePercent=50
 -XX:G1HeapRegionSize=16M
 -XX:G1ReservePercent=20
 -XX:InitiatingHeapOccupancyPercent=20
+
+-XX:-UseAdaptiveSizePolicy
+-XX:+UseStringDeduplication
+-XX:+UseNUMA

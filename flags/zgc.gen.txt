@@ -1,2 +1,3 @@
 -XX:+UseZGC
 -XX:+UnlockExperimentalVMOptions
+-XX:+UseNUMA
