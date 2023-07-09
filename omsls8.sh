@@ -19,7 +19,7 @@ mem_unit=${2:0-1:1}
 mem_amount=${2%$mem_unit}
 shell_dir=$(cd $(dirname $0); pwd)
 gc_txt=$shell_dir/flags/g1gc.txt
-common_txt=$shell_dir/flags/common8.txt
+common_txt=$shell_dir/flags/common.txt
 
 if [[ "${mem_unit^}" == "G" && $mem_amount -gt 12    ]]; then gc_txt=$shell_dir/flags/g1gc.gt12.txt; fi
 if [[ "${mem_unit^}" == "M" && $mem_amount -gt 12000 ]]; then gc_txt=$shell_dir/flags/g1gc.gt12.txt; fi

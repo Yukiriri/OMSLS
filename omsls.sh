@@ -22,18 +22,18 @@ mem_unit=${2:0-1:1}
 mem_amount=${2%$mem_unit}
 shell_dir=$(cd $(dirname $0); pwd)
 gc_flags=$shell_dir/flags/g1gc.txt
-common_flags=@$shell_dir/flags/common8.txt
+common_flags=@$shell_dir/flags/common.txt
 
 if [[ "${mem_unit^}" == "G" && $mem_amount -gt 12    ]]; then gc_flags=$shell_dir/flags/g1gc-gt12.txt; fi
 if [[ "${mem_unit^}" == "M" && $mem_amount -gt 12000 ]]; then gc_flags=$shell_dir/flags/g1gc-gt12.txt; fi
 if [[ $preset_java_version -ge 11 ]]; then
-  common_flags+=" @$shell_dir/flags/common11.txt"
+  common_flags+=" -XX:+UseVectorCmov"
 fi
 if [[ $preset_java_version -ge 17 ]]; then
-  common_flags+=" @$shell_dir/flags/common17.txt"
+  common_flags+=" --add-modules jdk.incubator.vector"
   if [[ $(cat /proc/cpuinfo | grep "processor" | wc -l) -ge 8 ]]; then
-    if [[ $is_fixedmem == 1 ]]; then gc_flags=$shell_dir/flags/sgc.txt; fi
-    if [[ $is_fixedmem == 0 ]]; then gc_flags=$shell_dir/flags/sgc.min.txt; fi
+    if [[ $is_fixedmem == 1 ]]; then gc_flags=$shell_dir/flags/zgc.txt; fi
+    if [[ $is_fixedmem == 0 ]]; then gc_flags=$shell_dir/flags/zgc.min.txt; fi
   fi
 fi
 if [[ $preset_java_version -ge 21 ]]; then

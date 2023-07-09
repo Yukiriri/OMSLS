@@ -3,6 +3,7 @@
 -XX:+PerfDisableSharedMem
 -XX:-DontCompileHugeMethods
 -XX:+UseFPUForSpilling
+-XX:+UseNUMA
 -XX:MaxInlineSize=480
 -XX:ReservedCodeCacheSize=512M
 

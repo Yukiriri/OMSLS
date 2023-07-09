@@ -16,4 +16,3 @@
 
 -XX:-UseAdaptiveSizePolicy
 -XX:+UseStringDeduplication
--XX:+UseNUMA

@@ -19,7 +19,7 @@ set mem_amount=%2
 set mem_unit=%mem_amount:~-1%
 set mem_amount=%mem_amount:~0,-1%
 set gc_txt=%~dp0\flags\g1gc.txt
-set common_txt=%~dp0\flags\common8.txt
+set common_txt=%~dp0\flags\common.txt
 
 if /i "%mem_unit%" == "G" if %mem_amount% GTR 12    set gc_txt=%~dp0\flags\g1gc.gt12.txt
 if /i "%mem_unit%" == "M" if %mem_amount% GTR 12000 set gc_txt=%~dp0\flags\g1gc.gt12.txt
