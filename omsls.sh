@@ -31,10 +31,8 @@ if [[ $preset_java_version -ge 11 ]]; then
 fi
 if [[ $preset_java_version -ge 17 ]]; then
   common_flags+=" --add-modules jdk.incubator.vector"
-  if [[ $(cat /proc/cpuinfo | grep "processor" | wc -l) -ge 8 ]]; then
-    if [[ $is_fixedmem == 1 ]]; then gc_flags=$shell_dir/flags/zgc.txt; fi
-    if [[ $is_fixedmem == 0 ]]; then gc_flags=$shell_dir/flags/zgc.min.txt; fi
-  fi
+  if [[ $is_fixedmem == 1 ]]; then gc_flags=$shell_dir/flags/zgc.txt; fi
+  if [[ $is_fixedmem == 0 ]]; then gc_flags=$shell_dir/flags/zgc.min.txt; fi
 fi
 if [[ $preset_java_version -ge 21 ]]; then
   if [[ $is_fixedmem == 1 ]]; then gc_flags=$shell_dir/flags/zgc.gen.txt; fi

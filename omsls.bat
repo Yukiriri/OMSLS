@@ -31,10 +31,8 @@ if %preset_java_version% GEQ 11 (
 )
 if %preset_java_version% GEQ 17 (
   set common_flags=%common_flags% --add-modules jdk.incubator.vector
-  if %NUMBER_OF_PROCESSORS% GEQ 8 (
-    if %is_fixedmem% == 1 set gc_flags=%~dp0\flags\zgc.txt
-    if %is_fixedmem% == 0 set gc_flags=%~dp0\flags\zgc.min.txt
-  )
+  if %is_fixedmem% == 1 set gc_flags=%~dp0\flags\zgc.txt
+  if %is_fixedmem% == 0 set gc_flags=%~dp0\flags\zgc.min.txt
 )
 if %preset_java_version% GEQ 21 (
   if %is_fixedmem% == 1 set gc_flags=%~dp0\flags\zgc.gen.txt
