@@ -8,11 +8,11 @@
 -XX:MaxTenuringThreshold=1
 -XX:SurvivorRatio=32
 
--XX:G1NewSizePercent=30
--XX:G1MaxNewSizePercent=40
--XX:G1HeapRegionSize=8M
--XX:G1ReservePercent=30
--XX:InitiatingHeapOccupancyPercent=15
+-XX:G1NewSizePercent=40
+-XX:G1MaxNewSizePercent=50
+-XX:G1HeapRegionSize=16M
+-XX:G1ReservePercent=20
+-XX:InitiatingHeapOccupancyPercent=20
 
 -XX:-UseAdaptiveSizePolicy
 -XX:+UseStringDeduplication
