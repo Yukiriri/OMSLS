@@ -52,7 +52,7 @@ git pull
   ```
   omsls17 purpur.jar 4G
   ```
-  2.最高分配4G堆大小，闲时尽可能缩减至2G（需要使用ZGC才能显著起效）
+  2.最高分配4G堆大小，闲时尽可能缩减至2G（需要使用ZGC）
   ```
   omsls17 purpur.jar 4G 2G
   ```
