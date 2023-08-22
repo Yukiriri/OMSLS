@@ -19,7 +19,10 @@ setlocal enabledelayedexpansion
 set flags=
 for /f %%i in (%gc_txt% %common_txt% %yggdrasil_txt%) do (set flags=!flags! %%i)
 
-%custom_java_path% -Xmx%2 -Xms%2 !flags! -jar %1 --nogui
+
 
 set yggdrasil_txt=
+
+%custom_java_path% -Xmx%2 -Xms%2 !flags! -jar %1 --nogui
+
 endlocal

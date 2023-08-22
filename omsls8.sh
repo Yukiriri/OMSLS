@@ -21,6 +21,6 @@ if [[ "$yggdrasil_txt" != "" ]]; then
   flags+="$(<$yggdrasil_txt) "
 fi
 
-$custom_java_path -Xmx$2 -Xms$2 $flags -XX:+UseTransparentHugePages -jar $1 --nogui
-
 export yggdrasil_txt=
+
+$custom_java_path -Xmx$2 -Xms$2 $flags -XX:+UseTransparentHugePages -jar $1 --nogui

@@ -14,8 +14,11 @@ else
   Xms=-Xms$3
 fi
 
-$custom_java_path -Xmx$2 $Xms @$gc_flags $extend_common_flags @$shell_dir/flags/common.txt $yggdrasil_flags -jar $1 --nogui
-
+gc_flags_bak=$gc_flags
+extend_common_flags_bak=$extend_common_flags
+yggdrasil_flags_bak=$yggdrasil_flags
 export gc_flags=
 export extend_common_flags=
 export yggdrasil_flags=
+
+$custom_java_path -Xmx$2 $Xms @$gc_flags_bak $extend_common_flags_bak @$shell_dir/flags/common.txt $yggdrasil_flags_bak -jar $1 --nogui

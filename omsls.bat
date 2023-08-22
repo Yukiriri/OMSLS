@@ -14,8 +14,11 @@ if "%3" == "" (
   set Xms=-Xms%3
 )
 
-%custom_java_path% -Xmx%2 %Xms% @%gc_flags% %extend_common_flags% @%~dp0\flags\common.txt %yggdrasil_flags% -jar %1 --nogui
-
+set gc_flags_bak=%gc_flags%
+set extend_common_flags_bak=%extend_common_flags%
+set yggdrasil_flags_bak=%yggdrasil_flags%
 set gc_flags=
 set extend_common_flags=
 set yggdrasil_flags=
+
+%custom_java_path% -Xmx%2 %Xms% @%gc_flags_bak% %extend_common_flags_bak% @%~dp0\flags\common.txt %yggdrasil_flags_bak% -jar %1 --nogui
