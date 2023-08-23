@@ -1,28 +1,18 @@
-@echo off & chcp 65001 >nul
+@echo off & chcp 65001 >nul & setlocal enabledelayedexpansion
 ::bat arg: <jar> <Xmx>
 ::env arg: [custom_java_path]
 
-if "%custom_java_path%" == "" (
-  set custom_java_path=java
+if "%omsls_gc_flags%" == "" (
+  set mem_amount=%2
+  set mem_unit=!mem_amount:~-1!
+  set mem_amount=!mem_amount:~0,-1!
+
+  set omsls_gc_flags=%~dp0\flags\g1gc.small.txt
+  if /i "!mem_unit!" == "G" if !mem_amount! GEQ 12    set omsls_gc_flags=%~dp0\flags\g1gc.txt
+  if /i "!mem_unit!" == "M" if !mem_amount! GEQ 12000 set omsls_gc_flags=%~dp0\flags\g1gc.txt
+
+  if "%omsls_is_legacy_java_cmd%" == "" set omsls_is_legacy_java_cmd=1
+  omsls.bat %1 %2
+) else (
+  omsls.bat %1 %2 %3
 )
-
-set mem_amount=%2
-set mem_unit=%mem_amount:~-1%
-set mem_amount=%mem_amount:~0,-1%
-set gc_txt=%~dp0\flags\g1gc.small.txt
-set common_txt=%~dp0\flags\common.txt
-
-if /i "%mem_unit%" == "G" if %mem_amount% GTR 12    set gc_txt=%~dp0\flags\g1gc.txt
-if /i "%mem_unit%" == "M" if %mem_amount% GTR 12000 set gc_txt=%~dp0\flags\g1gc.txt
-
-setlocal enabledelayedexpansion
-set flags=
-for /f %%i in (%gc_txt% %common_txt% %yggdrasil_txt%) do (set flags=!flags! %%i)
-
-
-
-set yggdrasil_txt=
-
-%custom_java_path% -Xmx%2 -Xms%2 !flags! -jar %1 --nogui
-
-endlocal

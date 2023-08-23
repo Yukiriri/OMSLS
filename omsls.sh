@@ -4,21 +4,31 @@ if [[ "$custom_java_path" == "" ]]; then
   custom_java_path=java
 fi
 
-shell_dir=$(cd $(dirname $0); pwd)
-export extend_common_flags+=" -XX:+UseVectorCmov"
-
 if [[ "$3" == "" ]]; then
   Xms=-Xms$2
-  export extend_common_flags+=" -XX:+UseTransparentHugePages"
+  omsls_extend_common_flags+="-XX:+UseTransparentHugePages "
 else
   Xms=-Xms$3
 fi
 
-gc_flags_bak=$gc_flags
-extend_common_flags_bak=$extend_common_flags
-yggdrasil_flags_bak=$yggdrasil_flags
-export gc_flags=
-export extend_common_flags=
-export yggdrasil_flags=
+shell_dir=$(cd $(dirname $0); pwd)
+omsls_common_flags=$shell_dir/flags/common.txt
 
-$custom_java_path -Xmx$2 $Xms @$gc_flags_bak $extend_common_flags_bak @$shell_dir/flags/common.txt $yggdrasil_flags_bak -jar $1 --nogui
+if [[ "$omsls_is_legacy_java_cmd" == "0" ]]; then
+  omsls_final_flags="@$omsls_gc_flags @$omsls_common_flags $omsls_extend_common_flags "
+  if [[ "$omsls_yggdrasil_flags" != "" ]]; then
+    omsls_final_flags+="@$omsls_yggdrasil_flags "
+  fi
+else
+  omsls_final_flags="$(<$omsls_gc_flags) $(<$omsls_common_flags) $omsls_extend_common_flags "
+  if [[ "$omsls_yggdrasil_flags" != "" ]]; then
+    omsls_final_flags+="$(<$omsls_yggdrasil_flags) "
+  fi
+fi
+
+export omsls_gc_flags=
+export omsls_extend_common_flags=
+export omsls_yggdrasil_flags=
+export omsls_is_legacy_java_cmd=
+
+echo $custom_java_path -Xmx$2 $Xms $omsls_final_flags -jar $1 --nogui

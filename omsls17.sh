@@ -3,14 +3,14 @@
 #env arg: [custom_java_path]
 
 shell_dir=$(cd $(dirname $0); pwd)
-export extend_common_flags+=" --add-modules jdk.incubator.vector"
+export omsls_extend_common_flags+="--add-modules jdk.incubator.vector "
 
-if [[ "$gc_flags" == "" ]]; then
+if [[ "$omsls_gc_flags" == "" ]]; then
   if [[ "$3" == "" ]]; then
-    export gc_flags=$shell_dir/flags/zgc.txt
+    export omsls_gc_flags=$shell_dir/flags/zgc.txt
   else
-    export gc_flags=$shell_dir/flags/zgc.min.txt
+    export omsls_gc_flags=$shell_dir/flags/zgc.min.txt
   fi
 fi
 
-omsls.sh $1 $2 $3
+omsls11.sh $1 $2 $3

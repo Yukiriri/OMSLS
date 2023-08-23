@@ -4,21 +4,31 @@ if "%custom_java_path%" == "" (
   set custom_java_path=java
 )
 
-
-set extend_common_flags=%extend_common_flags% -XX:+UseVectorCmov
-
 if "%3" == "" (
   set Xms=-Xms%2
-  rem set extend_common_flags=%extend_common_flags% -XX:+UseLargePages
+  rem set omsls_extend_common_flags=-XX:+UseLargePages %omsls_extend_common_flags%
 ) else (
   set Xms=-Xms%3
 )
 
-set gc_flags_bak=%gc_flags%
-set extend_common_flags_bak=%extend_common_flags%
-set yggdrasil_flags_bak=%yggdrasil_flags%
-set gc_flags=
-set extend_common_flags=
-set yggdrasil_flags=
 
-%custom_java_path% -Xmx%2 %Xms% @%gc_flags_bak% %extend_common_flags_bak% @%~dp0\flags\common.txt %yggdrasil_flags_bak% -jar %1 --nogui
+set omsls_common_flags=%~dp0\flags\common.txt
+
+if "%omsls_is_legacy_java_cmd%" == "0" (
+  set omsls_final_flags=@%omsls_gc_flags% @%omsls_common_flags% %omsls_extend_common_flags%
+  if not "%omsls_yggdrasil_flags%" == "" (
+    set omsls_final_flags=!omsls_final_flags! @%omsls_yggdrasil_flags%
+  )
+) else (
+  set omsls_final_flags=
+  for /f %%i in (%omsls_gc_flags% %omsls_common_flags% %omsls_yggdrasil_flags%) do (set omsls_final_flags=!omsls_final_flags! %%i)
+  set omsls_final_flags=!omsls_final_flags! %omsls_extend_common_flags%
+)
+
+
+set omsls_gc_flags=
+set omsls_extend_common_flags=
+set omsls_yggdrasil_flags=
+set omsls_is_legacy_java_cmd=
+
+echo %custom_java_path% -Xmx%2 %Xms% %omsls_final_flags% -jar %1 --nogui

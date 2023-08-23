@@ -1,13 +1,12 @@
-@echo off & chcp 65001 >nul
+@echo off & chcp 65001 >nul & setlocal enabledelayedexpansion
 ::bat arg: <jar> <Xmx>
 ::env arg: [custom_java_path]
 
-set mem_amount=%2
-set mem_unit=%mem_amount:~-1%
-set mem_amount=%mem_amount:~0,-1%
-set gc_flags=%~dp0\flags\g1gc.small.txt
+set omsls_extend_common_flags=-XX:+UseVectorCmov %omsls_extend_common_flags%
+set omsls_is_legacy_java_cmd=0
 
-if /i "%mem_unit%" == "G" if %mem_amount% GTR 12    set gc_flags=%~dp0\flags\g1gc.txt
-if /i "%mem_unit%" == "M" if %mem_amount% GTR 12000 set gc_flags=%~dp0\flags\g1gc.txt
-
-omsls.bat %1 %2
+if "%omsls_gc_flags%" == "" (
+  omsls8.bat %1 %2
+) else (
+  omsls8.bat %1 %2 %3
+)

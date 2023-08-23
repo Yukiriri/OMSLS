@@ -2,5 +2,5 @@
 #bat arg: <jar> <Xmx>
 #env arg: [custom_java_path]
 
-export yggdrasil_flags=@$(cd $(dirname $0); pwd)/flags/yggdrasil.txt
+export omsls_yggdrasil_flags=$(cd $(dirname $0); pwd)/flags/yggdrasil.txt
 omsls11.sh $1 $2

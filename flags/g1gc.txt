@@ -15,4 +15,3 @@
 -XX:InitiatingHeapOccupancyPercent=20
 
 -XX:-UseAdaptiveSizePolicy
--XX:+UseStringDeduplication
