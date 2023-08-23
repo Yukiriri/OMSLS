@@ -31,4 +31,4 @@ set omsls_extend_common_flags=
 set omsls_yggdrasil_flags=
 set omsls_is_legacy_java_cmd=
 
-echo %custom_java_path% -Xmx%2 %Xms% %omsls_final_flags% -jar %1 --nogui
+%custom_java_path% -Xmx%2 %Xms% %omsls_final_flags% -jar %1 --nogui
