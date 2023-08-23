@@ -38,8 +38,7 @@ git pull
 |文件|说明|
 |:-|:-|
 |omsls|不应该自己启动的核心脚本|
-|omsls8|Java8专版的启动脚本|
-|omsls11+|Java11+版本的启动脚本|
+|omslsxx|Java版本为xx的预设的启动脚本|
 |omslsxx.ls|已将yggdrasil更改为littleskin的启动脚本|
 
 - 命令格式
