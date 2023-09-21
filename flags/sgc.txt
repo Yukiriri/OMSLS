@@ -1,2 +1,0 @@
--XX:+UseShenandoahGC
--XX:+UnlockExperimentalVMOptions

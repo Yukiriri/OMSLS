@@ -2,7 +2,5 @@
 ::bat arg: <jar> <Xmx>
 ::env arg: [JAVA_EXE]
 
-set JAVA_OPTS=-XX:+UseVectorCmov %JAVA_OPTS%
-
-
-omsls8.bat %1 %2
+set omsls_yggdrasil_flags=%~dp0\flags\yggdrasil.txt
+omsls21.bat %1 %2

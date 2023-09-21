@@ -2,5 +2,11 @@
 ::bat arg: <jar> <Xmx>
 ::env arg: [JAVA_EXE]
 
-set omsls_yggdrasil_flags=%~dp0\flags\yggdrasil.txt
+set JAVA_OPTS=%JAVA_OPTS%
+
+
+if "%omsls_gc_flags%" == "" (
+  set omsls_gc_flags=%~dp0\flags\zgc.txt
+)
+
 omsls17.bat %1 %2

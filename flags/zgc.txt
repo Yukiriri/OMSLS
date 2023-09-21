@@ -1,2 +1,4 @@
 -XX:+UseZGC
 -XX:+UnlockExperimentalVMOptions
+-XX:+ZGenerational
+-XX:-ZProactive

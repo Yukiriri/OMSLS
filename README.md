@@ -10,10 +10,10 @@
 
 |版本|GC|状态|
 |:-|:-|:-|
-|Java8|G1GC|✅|
-|Java11|G1GC|✅|
-|Java17|ZGC|✅|
-|Java21|ZGC Gen|dev|
+|Java8|G1GC|已完成|
+|Java11|G1GC|已完成|
+|Java17|G1GC|已完成|
+|Java21|ZGC|已完成预览|
 
 # 安装
 
@@ -37,24 +37,18 @@ git pull
 
 |文件|说明|
 |:-|:-|
-|omsls|不应该自己启动的核心脚本|
-|omslsxx|Java版本为xx的预设的启动脚本|
+|omsls     |不应该自己启动的核心脚本|
+|omslsxx   |Java(xx)预设的启动脚本|
 |omslsxx.ls|已将yggdrasil更改为littleskin的启动脚本|
 
 - 命令格式
 
   omsls\<8/11/...\> \<jar\> \<Xmx\> \[Xms\]
 
-- 运行例子
-
-  1.分配固定4G堆大小
-  ```
-  omsls17 purpur.jar 4G
-  ```
-  2.最高分配4G堆大小，闲时尽可能缩减至2G（需要使用ZGC）
-  ```
-  omsls17 purpur.jar 4G 2G
-  ```
+  - 例子
+    ```
+    omsls17 purpur.jar 4G
+    ```
 
 # 学习参考
 

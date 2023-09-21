@@ -1,34 +1,20 @@
 #!/bin/bash
 
-if [[ "$custom_java_path" == "" ]]; then
-  custom_java_path=java
-fi
-
-if [[ "$3" == "" ]]; then
-  Xms=-Xms$2
-  omsls_extend_common_flags+="-XX:+UseTransparentHugePages "
-else
-  Xms=-Xms$3
-fi
-
 shell_dir=$(cd $(dirname $0); pwd)
 omsls_common_flags=$shell_dir/flags/common.txt
+JAVA_OPTS+="-XX:+UseTransparentHugePages "
 
-if [[ "$omsls_is_legacy_java_cmd" == "0" ]]; then
-  omsls_final_flags="@$omsls_gc_flags @$omsls_common_flags $omsls_extend_common_flags "
-  if [[ "$omsls_yggdrasil_flags" != "" ]]; then
-    omsls_final_flags+="@$omsls_yggdrasil_flags "
-  fi
-else
-  omsls_final_flags="$(<$omsls_gc_flags) $(<$omsls_common_flags) $omsls_extend_common_flags "
-  if [[ "$omsls_yggdrasil_flags" != "" ]]; then
-    omsls_final_flags+="$(<$omsls_yggdrasil_flags) "
-  fi
+if [[ "$JAVA_BIN" == "" ]]; then
+  JAVA_BIN=java
+fi
+
+JAVA_OPTS="$(<$omsls_gc_flags) $(<$omsls_common_flags) $JAVA_OPTS "
+if [[ "$omsls_yggdrasil_flags" != "" ]]; then
+  JAVA_OPTS+="$(<$omsls_yggdrasil_flags) "
 fi
 
 export omsls_gc_flags=
-export omsls_extend_common_flags=
 export omsls_yggdrasil_flags=
-export omsls_is_legacy_java_cmd=
 
-$custom_java_path -Xmx$2 $Xms $omsls_final_flags -jar $1 --nogui
+echo JAVA_OPTS=$JAVA_OPTS
+$JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS -jar $1 --nogui

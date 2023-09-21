@@ -1,34 +1,13 @@
-rem @echo off & chcp 65001 >nul
-
-if "%custom_java_path%" == "" (
-  set custom_java_path=java
-)
-
-if "%3" == "" (
-  set Xms=-Xms%2
-  rem set omsls_extend_common_flags=-XX:+UseLargePages %omsls_extend_common_flags%
-) else (
-  set Xms=-Xms%3
-)
-
 
 set omsls_common_flags=%~dp0\flags\common.txt
+rem set JAVA_OPTS=-XX:+UseLargePages %JAVA_OPTS%
 
-if "%omsls_is_legacy_java_cmd%" == "0" (
-  set omsls_final_flags=@%omsls_gc_flags% @%omsls_common_flags% %omsls_extend_common_flags%
-  if not "%omsls_yggdrasil_flags%" == "" (
-    set omsls_final_flags=!omsls_final_flags! @%omsls_yggdrasil_flags%
-  )
-) else (
-  set omsls_final_flags=
-  for /f %%i in (%omsls_gc_flags% %omsls_common_flags% %omsls_yggdrasil_flags%) do (set omsls_final_flags=!omsls_final_flags! %%i)
-  set omsls_final_flags=!omsls_final_flags! %omsls_extend_common_flags%
+if "%JAVA_EXE%" == "" (
+  set JAVA_EXE=java
 )
 
+set JAVA_OPTS=
+for /f %%i in (%omsls_gc_flags% %omsls_common_flags% %omsls_yggdrasil_flags%) do (set JAVA_OPTS=!JAVA_OPTS! %%i)
 
-set omsls_gc_flags=
-set omsls_extend_common_flags=
-set omsls_yggdrasil_flags=
-set omsls_is_legacy_java_cmd=
-
-%custom_java_path% -Xmx%2 %Xms% %omsls_final_flags% -jar %1 --nogui
+echo JAVA_OPTS=%JAVA_OPTS%
+%JAVA_EXE% -Xms%2 -Xmx%2 %JAVA_OPTS% -jar %1 --nogui

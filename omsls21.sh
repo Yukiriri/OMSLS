@@ -1,0 +1,13 @@
+#!/bin/bash
+#bat arg: <jar> <Xmx>
+#env arg: [JAVA_BIN]
+
+export JAVA_OPTS="$JAVA_OPTS"
+
+
+if [[ "$omsls_gc_flags" == "" ]]; then
+  shell_dir=$(cd $(dirname $0); pwd)
+  export omsls_gc_flags=$shell_dir/flags/zgc.txt
+fi
+
+omsls17.sh $1 $2
