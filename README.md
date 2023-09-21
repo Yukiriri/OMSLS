@@ -43,7 +43,7 @@ git pull
 
 - 命令格式
 
-  omsls\<8/11/...\> \<jar\> \<Xmx\> \[Xms\]
+  omsls\<8/11/...\> \<jar\> \<Xmx\>
 
   - 例子
     ```
