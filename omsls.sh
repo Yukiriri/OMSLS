@@ -16,5 +16,5 @@ fi
 export omsls_gc_flags=
 export omsls_yggdrasil_flags=
 
-echo JAVA_OPTS=$JAVA_OPTS
+#echo JAVA_OPTS=$JAVA_OPTS
 $JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS -jar $1 --nogui

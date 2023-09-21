@@ -9,5 +9,5 @@ if "%JAVA_EXE%" == "" (
 set JAVA_OPTS=
 for /f %%i in (%omsls_gc_flags% %omsls_common_flags% %omsls_yggdrasil_flags%) do (set JAVA_OPTS=!JAVA_OPTS! %%i)
 
-echo JAVA_OPTS=%JAVA_OPTS%
+rem echo JAVA_OPTS=%JAVA_OPTS%
 %JAVA_EXE% -Xms%2 -Xmx%2 %JAVA_OPTS% -jar %1 --nogui
