@@ -5,4 +5,4 @@
 set JAVA_OPTS=--add-modules jdk.incubator.vector %JAVA_OPTS%
 
 
-omsls11.bat %1 %2
+omsls11 %1 %2

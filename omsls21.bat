@@ -9,4 +9,4 @@ if "%omsls_gc_flags%" == "" (
   set omsls_gc_flags=%~dp0\flags\zgc.txt
 )
 
-omsls17.bat %1 %2
+omsls17 %1 %2

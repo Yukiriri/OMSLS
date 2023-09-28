@@ -23,4 +23,4 @@ if "%omsls_gc_flags%" == "" (
   )
 )
 
-omsls.bat %1 %2
+omsls %1 %2

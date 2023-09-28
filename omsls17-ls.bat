@@ -3,4 +3,4 @@
 ::env arg: [JAVA_EXE]
 
 set omsls_yggdrasil_flags=%~dp0\flags\yggdrasil.txt
-omsls11.bat %1 %2
+omsls17 %1 %2

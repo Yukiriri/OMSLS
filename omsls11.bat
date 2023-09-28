@@ -5,4 +5,4 @@
 set JAVA_OPTS=-XX:+UseVectorCmov %JAVA_OPTS%
 
 
-omsls8.bat %1 %2
+omsls8 %1 %2
