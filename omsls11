@@ -1,5 +1,5 @@
 #!/bin/bash
-#bat arg: <jar> <Xmx>
+#cmd arg: <jar> <Xmx>
 #env arg: [JAVA_BIN]
 
 export JAVA_OPTS+="-XX:+UseVectorCmov "

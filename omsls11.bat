@@ -1,5 +1,5 @@
 @echo off & chcp 65001 >nul & setlocal enabledelayedexpansion
-::bat arg: <jar> <Xmx>
+::cmd arg: <jar> <Xmx>
 ::env arg: [JAVA_EXE]
 
 set JAVA_OPTS=-XX:+UseVectorCmov %JAVA_OPTS%
