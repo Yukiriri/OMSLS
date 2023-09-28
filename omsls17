@@ -5,4 +5,4 @@
 export JAVA_OPTS+="--add-modules jdk.incubator.vector "
 
 
-omsls11.sh $1 $2
+omsls11 $1 $2

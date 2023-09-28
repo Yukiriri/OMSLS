@@ -5,4 +5,4 @@
 export JAVA_OPTS+="-XX:+UseVectorCmov "
 
 
-omsls8.sh $1 $2
+omsls8 $1 $2

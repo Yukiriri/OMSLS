@@ -3,4 +3,4 @@
 #env arg: [JAVA_BIN]
 
 export omsls_yggdrasil_flags=$(cd $(dirname $0); pwd)/flags/yggdrasil.txt
-omsls17.sh $1 $2
+omsls17 $1 $2
