@@ -2,25 +2,25 @@
 #cmd arg: <jar> <Xmx>
 #env arg: [JAVA_BIN]
 
-export JAVA_OPTS="$JAVA_OPTS"
+export OMSLS_OPTS="$OMSLS_OPTS"
 
-
-if [[ "$omsls_gc_flags" == "" ]]; then
+if [[ "$OMSLS_GC_FLAGS" == "" ]]; then
   mem_unit=${2:0-1:1}
   mem_amount=${2%$mem_unit}
   shell_dir=$(cd $(dirname $0); pwd)
 
-  export omsls_gc_flags=$shell_dir/flags/g1gc.txt
+  export OMSLS_GC_FLAGS=$shell_dir/flags/g1gc.txt
   if [[ "${mem_unit^}" == "G" ]]; then
-    if [[ $mem_amount -gt 12 ]]; then    export omsls_gc_flags=$shell_dir/flags/g1gc.higher.txt; fi
+    if [[ $mem_amount -gt 12 ]]; then    export OMSLS_GC_FLAGS=$shell_dir/flags/g1gc.higher.txt; fi
   fi
   if [[ "${mem_unit^}" == "M" ]]; then
-    if [[ $mem_amount -gt 12000 ]]; then export omsls_gc_flags=$shell_dir/flags/g1gc.higher.txt; fi
+    if [[ $mem_amount -gt 12000 ]]; then export OMSLS_GC_FLAGS=$shell_dir/flags/g1gc.higher.txt; fi
     if [[ $mem_amount -lt 250 ]]; then
-      echo [OMSLS][error]: \'Xmx\' require 250M+
+      echo [OMSLS][ERROR]: \'Xmx\' require 250M+
       exit
     fi
   fi
 fi
+if [[ "$OMSLS_JAVA8" == "" ]]; then export OMSLS_JAVA8=1; fi
 
 omsls $1 $2

@@ -2,7 +2,8 @@
 #cmd arg: <jar> <Xmx>
 #env arg: [JAVA_BIN]
 
-export JAVA_OPTS+="-XX:+UseVectorCmov "
+export OMSLS_OPTS="-XX:+UseVectorCmov $OMSLS_OPTS"
 
+if [[ "$OMSLS_JAVA8" == "" ]]; then export OMSLS_JAVA8=0; fi
 
 omsls8 $1 $2

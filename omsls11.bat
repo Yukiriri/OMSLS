@@ -2,7 +2,8 @@
 ::cmd arg: <jar> <Xmx>
 ::env arg: [JAVA_EXE]
 
-set JAVA_OPTS=-XX:+UseVectorCmov %JAVA_OPTS%
+set OMSLS_OPTS=-XX:+UseVectorCmov %OMSLS_OPTS%
 
+if "%OMSLS_JAVA8%" == "" set OMSLS_JAVA8=0
 
 omsls8 %1 %2

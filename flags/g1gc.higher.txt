@@ -1,3 +1,16 @@
+-XX:+AlwaysPreTouch
+-XX:+DisableExplicitGC
+-XX:+PerfDisableSharedMem
+-XX:-DontCompileHugeMethods
+-XX:+UseFPUForSpilling
+-XX:+UseNUMA
+-XX:MaxInlineSize=480
+-XX:ReservedCodeCacheSize=512M
+-XX:+ExitOnOutOfMemoryError
+-Dfile.encoding=UTF-8
+-Djava.awt.headless=true
+-XX:-UseAdaptiveSizePolicy
+
 -XX:+UseG1GC
 -XX:+UnlockExperimentalVMOptions
 -XX:MaxGCPauseMillis=200
@@ -13,5 +26,3 @@
 -XX:G1HeapRegionSize=16M
 -XX:G1ReservePercent=20
 -XX:InitiatingHeapOccupancyPercent=20
-
--XX:-UseAdaptiveSizePolicy

@@ -1,22 +1,20 @@
 #!/bin/bash
 
-shell_dir=$(cd $(dirname $0); pwd)
-omsls_common_flags=$shell_dir/flags/common.txt
-JAVA_OPTS+="-XX:+UseTransparentHugePages "
-
 if [[ "$JAVA_BIN" == "" ]]; then
   JAVA_BIN=java
 fi
 
-JAVA_OPTS="$(<$omsls_gc_flags) $(<$omsls_common_flags) $JAVA_OPTS "
-if [[ "$omsls_yggdrasil_flags" != "" ]]; then
-  JAVA_OPTS+="$(<$omsls_yggdrasil_flags) "
+JAVA_OPTS="-XX:+UseTransparentHugePages "
+
+if [[ "$OMSLS_JAVA8" == "1" ]]; then
+  if [[ "$OMSLS_YGGDRASIL_FLAGS" == "" ]]; then export OMSLS_YGGDRASIL_FLAGS="$(cd $(dirname $0); pwd)/flags/yggdrasil_null.txt"; fi
+  JAVA_OPTS="$(<$OMSLS_GC_FLAGS) $(<$OMSLS_YGGDRASIL_FLAGS) $JAVA_OPTS $OMSLS_OPTS"
+else
+  JAVA_OPTS="@$OMSLS_GC_FLAGS $OMSLS_YGGDRASIL_FLAGS $JAVA_OPTS $OMSLS_OPTS"
 fi
 
-export omsls_gc_flags=
-export omsls_yggdrasil_flags=
-JAVA_OPTS1="$JAVA_OPTS"
-export JAVA_OPTS=
-
 #echo JAVA_OPTS=$JAVA_OPTS
-$JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS1 -jar $1 --nogui
+export OMSLS_GC_FLAGS=
+export OMSLS_YGGDRASIL_FLAGS=
+export OMSLS_OPTS=
+$JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS -jar $1 --nogui

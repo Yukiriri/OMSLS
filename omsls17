@@ -2,7 +2,6 @@
 #cmd arg: <jar> <Xmx>
 #env arg: [JAVA_BIN]
 
-export JAVA_OPTS+="--add-modules jdk.incubator.vector "
-
+export OMSLS_OPTS="--add-modules jdk.incubator.vector $OMSLS_OPTS"
 
 omsls11 $1 $2

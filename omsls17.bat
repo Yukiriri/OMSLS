@@ -2,7 +2,6 @@
 ::cmd arg: <jar> <Xmx>
 ::env arg: [JAVA_EXE]
 
-set JAVA_OPTS=--add-modules jdk.incubator.vector %JAVA_OPTS%
-
+set OMSLS_OPTS=--add-modules jdk.incubator.vector %OMSLS_OPTS%
 
 omsls11 %1 %2

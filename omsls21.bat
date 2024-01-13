@@ -2,11 +2,10 @@
 ::cmd arg: <jar> <Xmx>
 ::env arg: [JAVA_EXE]
 
-set JAVA_OPTS=%JAVA_OPTS%
+set OMSLS_OPTS=%OMSLS_OPTS%
 
-
-if "%omsls_gc_flags%" == "" (
-  set omsls_gc_flags=%~dp0\flags\zgc.txt
+if "%OMSLS_GC_FLAGS%" == "" (
+  set OMSLS_GC_FLAGS=%~dp0\flags\zgc.txt
 )
 
 omsls17 %1 %2

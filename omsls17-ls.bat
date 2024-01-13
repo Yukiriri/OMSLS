@@ -2,5 +2,5 @@
 ::cmd arg: <jar> <Xmx>
 ::env arg: [JAVA_EXE]
 
-set omsls_yggdrasil_flags=%~dp0\flags\yggdrasil.txt
+set OMSLS_YGGDRASIL_FLAGS=@%~dp0\flags\yggdrasil.txt
 omsls17 %1 %2
