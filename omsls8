@@ -3,11 +3,12 @@
 #env arg: [JAVA_BIN]
 
 export OMSLS_OPTS="$OMSLS_OPTS"
+shell_dir=$(cd $(dirname $0); pwd)
 
 if [[ "$OMSLS_GC_FLAGS" == "" ]]; then
   mem_unit=${2:0-1:1}
   mem_amount=${2%$mem_unit}
-  shell_dir=$(cd $(dirname $0); pwd)
+  
 
   export OMSLS_GC_FLAGS=$shell_dir/flags/g1gc.txt
   if [[ "${mem_unit^}" == "G" ]]; then
@@ -23,4 +24,4 @@ if [[ "$OMSLS_GC_FLAGS" == "" ]]; then
 fi
 if [[ "$OMSLS_JAVA8" == "" ]]; then export OMSLS_JAVA8=1; fi
 
-omsls $1 $2
+$shell_dir/omsls $1 $2

@@ -4,6 +4,7 @@
 
 set OMSLS_OPTS=%OMSLS_OPTS%
 
+
 if "%OMSLS_GC_FLAGS%" == "" (
   set mem_amount=%2
   set mem_unit=!mem_amount:~-1!
@@ -23,4 +24,4 @@ if "%OMSLS_GC_FLAGS%" == "" (
 )
 if "%OMSLS_JAVA8%" == "" set OMSLS_JAVA8=1
 
-omsls %1 %2
+%~dp0\omsls %1 %2

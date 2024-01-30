@@ -3,9 +3,10 @@
 #env arg: [JAVA_BIN]
 
 export OMSLS_OPTS="$OMSLS_OPTS"
+shell_dir=$(cd $(dirname $0); pwd)
 
 if [[ "$OMSLS_GC_FLAGS" == "" ]]; then
-  export OMSLS_GC_FLAGS=$(cd $(dirname $0); pwd)/flags/zgc.txt
+  export OMSLS_GC_FLAGS=$shell_dir/flags/zgc.txt
 fi
 
-omsls17 $1 $2
+$shell_dir/omsls17 $1 $2

@@ -4,4 +4,5 @@
 
 set OMSLS_OPTS=--add-modules jdk.incubator.vector %OMSLS_OPTS%
 
-omsls11 %1 %2
+
+%~dp0\omsls11 %1 %2

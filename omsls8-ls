@@ -2,5 +2,6 @@
 #cmd arg: <jar> <Xmx>
 #env arg: [JAVA_BIN]
 
-export OMSLS_YGGDRASIL_FLAGS=$(cd $(dirname $0); pwd)/flags/yggdrasil.txt
-omsls8 $1 $2
+shell_dir=$(cd $(dirname $0); pwd)
+export OMSLS_YGGDRASIL_FLAGS=$shell_dir/flags/yggdrasil.txt
+$shell_dir/omsls8 $1 $2

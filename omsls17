@@ -3,5 +3,6 @@
 #env arg: [JAVA_BIN]
 
 export OMSLS_OPTS="--add-modules jdk.incubator.vector $OMSLS_OPTS"
+shell_dir=$(cd $(dirname $0); pwd)
 
-omsls11 $1 $2
+$shell_dir/omsls11 $1 $2

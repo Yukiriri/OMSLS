@@ -4,6 +4,7 @@
 
 set OMSLS_OPTS=-XX:+UseVectorCmov %OMSLS_OPTS%
 
+
 if "%OMSLS_JAVA8%" == "" set OMSLS_JAVA8=0
 
-omsls8 %1 %2
+%~dp0\omsls8 %1 %2
