@@ -55,7 +55,7 @@ git pull
 
   - 例子
     ```
-    omsls17 purpur.jar 4G
+    omsls21 purpur.jar 4G
     ```
 
   - 提示：使用littleskin版本需要在上级目录放置authlib-injector.jar
