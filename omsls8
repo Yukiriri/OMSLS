@@ -2,14 +2,12 @@
 #cmd arg: <jar> <Xmx>
 #env arg: [JAVA_BIN]
 
-export OMSLS_OPTS="$OMSLS_OPTS"
 shell_dir=$(cd $(dirname $0); pwd)
-
+corrected_mem=$2
 if [[ "$OMSLS_GC_FLAGS" == "" ]]; then
   mem_unit=${2:0-1:1}
   mem_amount=${2%$mem_unit}
   
-
   export OMSLS_GC_FLAGS=$shell_dir/flags/g1gc.txt
   if [[ "${mem_unit^}" == "G" ]]; then
     if [[ $mem_amount -gt 12 ]]; then    export OMSLS_GC_FLAGS=$shell_dir/flags/g1gc.higher.txt; fi
@@ -17,11 +15,10 @@ if [[ "$OMSLS_GC_FLAGS" == "" ]]; then
   if [[ "${mem_unit^}" == "M" ]]; then
     if [[ $mem_amount -gt 12000 ]]; then export OMSLS_GC_FLAGS=$shell_dir/flags/g1gc.higher.txt; fi
     if [[ $mem_amount -lt 250 ]]; then
-      echo [OMSLS][ERROR]: \'Xmx\' require 250M+
-      exit
+      corrected_mem=250M
     fi
   fi
 fi
 if [[ "$OMSLS_JAVA8" == "" ]]; then export OMSLS_JAVA8=1; fi
 
-$shell_dir/omsls $1 $2
+$shell_dir/omsls $1 $corrected_mem

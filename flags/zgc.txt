@@ -1,16 +1,19 @@
+-XX:+IgnoreUnrecognizedVMOptions
+-XX:+UnlockExperimentalVMOptions
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
 -XX:+PerfDisableSharedMem
 -XX:-DontCompileHugeMethods
 -XX:+UseFPUForSpilling
--XX:+UseNUMA
 -XX:MaxInlineSize=480
 -XX:ReservedCodeCacheSize=512M
+-XX:+UseNUMA
+-XX:+UseVectorCmov
+--add-modules jdk.incubator.vector
 -XX:+ExitOnOutOfMemoryError
 -Dfile.encoding=UTF-8
 -Djava.awt.headless=true
 
 -XX:+UseZGC
--XX:+UnlockExperimentalVMOptions
 -XX:+ZGenerational
 -XX:-ZProactive

@@ -2,9 +2,7 @@
 #cmd arg: <jar> <Xmx>
 #env arg: [JAVA_BIN]
 
-export OMSLS_OPTS="-XX:+UseVectorCmov $OMSLS_OPTS"
 shell_dir=$(cd $(dirname $0); pwd)
-
 if [[ "$OMSLS_JAVA8" == "" ]]; then export OMSLS_JAVA8=0; fi
 
 $shell_dir/omsls8 $1 $2

@@ -1,18 +1,20 @@
+-XX:+IgnoreUnrecognizedVMOptions
+-XX:+UnlockExperimentalVMOptions
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
 -XX:+PerfDisableSharedMem
 -XX:-DontCompileHugeMethods
 -XX:+UseFPUForSpilling
--XX:+UseNUMA
 -XX:MaxInlineSize=480
 -XX:ReservedCodeCacheSize=512M
+-XX:+UseNUMA
+-XX:+UseVectorCmov
+--add-modules jdk.incubator.vector
 -XX:+ExitOnOutOfMemoryError
 -Dfile.encoding=UTF-8
 -Djava.awt.headless=true
--XX:-UseAdaptiveSizePolicy
 
 -XX:+UseG1GC
--XX:+UnlockExperimentalVMOptions
 -XX:MaxGCPauseMillis=200
 -XX:G1HeapWastePercent=5
 -XX:G1RSetUpdatingPauseTimePercent=5
@@ -24,5 +26,5 @@
 -XX:G1NewSizePercent=30
 -XX:G1MaxNewSizePercent=40
 -XX:G1HeapRegionSize=8M
--XX:G1ReservePercent=30
+-XX:G1ReservePercent=33
 -XX:InitiatingHeapOccupancyPercent=15

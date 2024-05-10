@@ -4,14 +4,16 @@ if "%JAVA_EXE%" == "" (
   set JAVA_EXE=java
 )
 
-set JAVA_OPTS=
+rem set JAVA_OPTS=-XX:+UseLargePages
 
 if "%OMSLS_JAVA8%" == "1" (
   for /f %%i in (%OMSLS_GC_FLAGS% %OMSLS_YGGDRASIL_FLAGS%) do (set JAVA_OPTS=!JAVA_OPTS! %%i)
-  set JAVA_OPTS=!JAVA_OPTS! %OMSLS_OPTS%
 ) else (
-  set JAVA_OPTS=@%OMSLS_GC_FLAGS% %OMSLS_YGGDRASIL_FLAGS% !JAVA_OPTS! %OMSLS_OPTS%
+  set JAVA_OPTS=@%OMSLS_GC_FLAGS% %OMSLS_YGGDRASIL_FLAGS% !JAVA_OPTS!
 )
 
-rem echo JAVA_OPTS=%JAVA_OPTS%
-%JAVA_EXE% -Xms%2 -Xmx%2 %JAVA_OPTS% -jar %1 --nogui
+if "%OMSLS_INTERNAL_DEV%" == "1" (
+  echo JAVA_OPTS=%JAVA_OPTS%
+) else (
+  %JAVA_EXE% -Xms%2 -Xmx%2 %JAVA_OPTS% -jar %1 --nogui
+)

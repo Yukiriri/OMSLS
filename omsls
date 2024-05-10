@@ -4,17 +4,19 @@ if [[ "$JAVA_BIN" == "" ]]; then
   JAVA_BIN=java
 fi
 
-JAVA_OPTS="-XX:+UseTransparentHugePages "
+#JAVA_OPTS="-XX:+UseLargePages"
 
 if [[ "$OMSLS_JAVA8" == "1" ]]; then
-  if [[ "$OMSLS_YGGDRASIL_FLAGS" == "" ]]; then export OMSLS_YGGDRASIL_FLAGS="$(cd $(dirname $0); pwd)/flags/yggdrasil_null.txt"; fi
-  JAVA_OPTS="$(<$OMSLS_GC_FLAGS) $(<$OMSLS_YGGDRASIL_FLAGS) $JAVA_OPTS $OMSLS_OPTS"
+  if [[ "$OMSLS_YGGDRASIL_FLAGS" == "" ]]; then export OMSLS_YGGDRASIL_FLAGS="/dev/null"; fi
+  JAVA_OPTS="$(<$OMSLS_GC_FLAGS) $(<$OMSLS_YGGDRASIL_FLAGS) $JAVA_OPTS"
 else
-  JAVA_OPTS="@$OMSLS_GC_FLAGS $OMSLS_YGGDRASIL_FLAGS $JAVA_OPTS $OMSLS_OPTS"
+  JAVA_OPTS="@$OMSLS_GC_FLAGS $OMSLS_YGGDRASIL_FLAGS $JAVA_OPTS"
 fi
 
-#echo JAVA_OPTS=$JAVA_OPTS
 export OMSLS_GC_FLAGS=
 export OMSLS_YGGDRASIL_FLAGS=
-export OMSLS_OPTS=
-$JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS -jar $1 --nogui
+if [[ "$OMSLS_INTERNAL_DEV" == "1" ]]; then
+  echo JAVA_OPTS=$JAVA_OPTS
+else
+  $JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS -jar $1 --nogui
+fi
