@@ -46,8 +46,8 @@ git pull
 |文件|说明|
 |:-|:-|
 |omsls     |不应该自己启动的核心脚本|
-|omslsxx   |Java(xx)预设的启动脚本|
-|omslsxx.ls|已将yggdrasil更改为littleskin的启动脚本|
+|omsls(xx)   |Java(xx)预设的启动脚本|
+|omsls(xx)-ls|已将yggdrasil更改为littleskin的启动脚本|
 
 - 命令格式
 
