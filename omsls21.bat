@@ -7,4 +7,4 @@ if "%OMSLS_GC_FLAGS%" == "" (
   set OMSLS_GC_FLAGS=%~dp0\flags\zgc.txt
 )
 
-%~dp0\omsls17 %1 %2
+%~dp0\omsls %1 %2

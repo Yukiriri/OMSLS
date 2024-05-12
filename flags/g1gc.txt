@@ -4,11 +4,11 @@
 -XX:+DisableExplicitGC
 -XX:+PerfDisableSharedMem
 -XX:-DontCompileHugeMethods
--XX:+UseFPUForSpilling
 -XX:MaxInlineSize=480
 -XX:ReservedCodeCacheSize=512M
 -XX:+UseNUMA
 -XX:+UseVectorCmov
+-XX:+UseFPUForSpilling
 --add-modules jdk.incubator.vector
 -XX:+ExitOnOutOfMemoryError
 -Dfile.encoding=UTF-8
