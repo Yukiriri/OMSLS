@@ -15,7 +15,7 @@
 |Java8|G1GC|已完成|
 |Java11|G1GC|已完成|
 |Java17|G1GC|已完成|
-|Java21|ZGC|已完成|
+|Java21|ZGC|已完成，等待进一步优化|
 
 |MC版本|建议|
 |:-|:-|
