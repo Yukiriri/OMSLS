@@ -76,7 +76,7 @@ git pull
         - 给服务端分配4G内存，在进程运行时候的内存占用大概是（堆4G + 非堆1G+ = 5G+占用）
         - 给客户端分配4G内存，在进程运行时候的内存占用大概是（堆4G + 非堆1G+ + OpenGL 2G+ = 7G+占用）
 
-  - 关于开启大页内存，如果你的Host OS已经开启了大页，那么Container OS开不开都一样；除非你直接在Host OS运行服务端，那就需要自己手动配置LargePages
+  - 关于开启大页内存：如果你的Host OS已经开启了大页，那么Container OS开不开都一样。如果你直接在Host OS运行服务端，那就需要自己手动配置LargePages
 
   - 其实Java17也可以用ZGC，但由于不能分代，每一次GC都等价于Full GC，对性能消耗比较大，所以我放弃了Java17开启ZGC
 
