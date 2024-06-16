@@ -3,16 +3,12 @@
 -XX:+AlwaysPreTouch
 -XX:+DisableExplicitGC
 -XX:+PerfDisableSharedMem
--XX:-DontCompileHugeMethods
--XX:MaxInlineSize=480
--XX:ReservedCodeCacheSize=512M
--XX:+UseNUMA
--XX:+UseVectorCmov
--XX:+UseFPUForSpilling
---add-modules jdk.incubator.vector
 -XX:+ExitOnOutOfMemoryError
 -Dfile.encoding=UTF-8
 -Djava.awt.headless=true
+-XX:MaxInlineSize=480
+-XX:ReservedCodeCacheSize=512M
+--add-modules=jdk.incubator.vector
 
 -XX:+UseZGC
 -XX:+ZGenerational
