@@ -65,7 +65,7 @@ git pull
 
 - <a target="_blank" href="https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft">Aikar's Flags</a>
 - <a target="_blank" href="https://github.com/YouHaveTrouble/minecraft-optimization">YouHaveTrouble/minecraft-optimization</a>
-- <a target="_blank" href="https://flags.sh">flags.sh/</a>
+- <a target="_blank" href="https://flags.sh">flags.sh</a>
 - 群友大佬提供的参数
 
 # 经验总结建议
