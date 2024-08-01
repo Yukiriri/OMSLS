@@ -24,6 +24,11 @@
 |1.17+|Java17|
 |1.20.5+|Java21|
 
+推荐JDK：
+<a href="https://adoptium.net/zh-CN/temurin/releases/">Adoptium JDK</a>
+<a href="https://bell-sw.com/pages/downloads/">Liberica JDK</a>
+<a href="https://www.azul.com/downloads/?package=jdk#zulu">Zulu JDK</a>
+
 # 安装
 
 1.下载仓库
