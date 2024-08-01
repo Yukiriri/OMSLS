@@ -25,9 +25,9 @@
 |1.20.5+|Java21|
 
 推荐JDK：
-<a href="https://adoptium.net/zh-CN/temurin/releases/">Adoptium JDK</a>
-<a href="https://bell-sw.com/pages/downloads/">Liberica JDK</a>
-<a href="https://www.azul.com/downloads/?package=jdk#zulu">Zulu JDK</a>
+<a target="_blank" href="https://adoptium.net/zh-CN/temurin/releases/">Adoptium JDK</a>
+<a target="_blank" href="https://bell-sw.com/pages/downloads/">Liberica JDK</a>
+<a target="_blank" href="https://www.azul.com/downloads/?package=jdk#zulu">Zulu JDK</a>
 
 # 安装
 
@@ -45,7 +45,7 @@ git clone https://github.com/Yukiriri/OMSLS.git
 cd OMSLS
 git pull
 ```
-提示：在Windows平台建议把服全部关闭后再更新，这个涉及到win对bat读取的逆天机制/BUG
+提示：在Windows平台建议把服关闭后再更新，这个涉及到win对bat读取的逆天机制/BUG
 
 # 启动
 
