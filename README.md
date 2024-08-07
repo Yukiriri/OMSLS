@@ -5,8 +5,8 @@
 </div>
 
 一个自动化选择MC通用优化的启动脚本，在同等内存分配的情况下可以比无任何优化降低更多负载<br/>
-并且在使用Java21 ZGC时可以有效缓解区块内存泄漏，也就是内存回收得更彻底，这也得益于ZGC的染色指针设计<br/>
-以我的长期测试下来，涵盖了Java11到Java21，对比了三大热门GC（G1GC SGC ZGC），测试了原版插件服到重型整合包服，可以结论出，无论是服务端还是客户端MC，Java21开始的分代ZGC已经可以完全接任G1GC<br/>
+并且在使用Java21 ZGC时可以有效缓解区块内存泄漏，能控制住膨胀，这也得益于ZGC各种新设计<br/>
+以我的长期测试下来，涵盖了Java11到Java21，对比了三大热门GC（G1GC SGC ZGC），测试了原版插件服到重型整合包服，可以结论出，无论是服务端还是客户端MC，Java21的分代ZGC已经可以开始接任G1GC<br/>
 
 # 当前支持范围和策略
 
@@ -30,17 +30,13 @@
 <a target="_blank" href="https://www.azul.com/downloads/?package=jdk#zulu">Zulu JDK</a>
 
 # 安装
-
 1.下载仓库
-
 ```
 git clone https://github.com/Yukiriri/OMSLS.git
 ```
-
 2.将目录添加到环境变量或者其他可以直接启动的地方
 
 # 更新
-
 ```
 cd OMSLS
 git pull
@@ -48,7 +44,6 @@ git pull
 提示：在Windows平台建议把服关闭后再更新，这个涉及到win对bat读取的逆天机制/BUG
 
 # 启动
-
 |文件|说明|
 |:-|:-|
 |omsls     |不应该自己启动的核心脚本|
@@ -58,23 +53,19 @@ git pull
 - 命令格式
 
   omsls\<8/11/...\> \<jar\> \<Xmx\>
-
   - 例子
     ```
     omsls21 purpur.jar 4G
     ```
-
   - 提示：使用littleskin版本需要在上级目录放置authlib-injector.jar
 
 # 学习参考
-
 - <a target="_blank" href="https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft">Aikar's Flags</a>
 - <a target="_blank" href="https://github.com/YouHaveTrouble/minecraft-optimization">YouHaveTrouble/minecraft-optimization</a>
 - <a target="_blank" href="https://flags.sh">flags.sh</a>
 - 群友大佬提供的参数
 
 # 经验总结建议
-
   - 关于Java进程内存占用：
     - Java进程不仅仅只包括堆内存，还有非堆内存，以及外界API管理的内存
     - 例如：
