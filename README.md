@@ -25,11 +25,12 @@
 |1.20.5+|Java21|
 
 推荐JDK：
-<a target="_blank" href="https://adoptium.net/zh-CN/temurin/releases/">Adoptium JDK</a>
-<a target="_blank" href="https://bell-sw.com/pages/downloads/">Liberica JDK</a>
-<a target="_blank" href="https://www.azul.com/downloads/?package=jdk#zulu">Zulu JDK</a>
+<a href="https://adoptium.net/zh-CN/temurin/releases/">Adoptium JDK</a>
+<a href="https://bell-sw.com/pages/downloads/">Liberica JDK</a>
+<a href="https://www.azul.com/downloads/?package=jdk#zulu">Zulu JDK</a>
 
 # 安装
+
 1.下载仓库
 ```
 git clone https://github.com/Yukiriri/OMSLS.git
@@ -37,6 +38,7 @@ git clone https://github.com/Yukiriri/OMSLS.git
 2.将目录添加到环境变量或者其他可以直接启动的地方
 
 # 更新
+
 ```
 cd OMSLS
 git pull
@@ -44,6 +46,7 @@ git pull
 提示：在Windows平台建议把服关闭后再更新，这个涉及到win对bat读取的逆天机制/BUG
 
 # 启动
+
 |文件|说明|
 |:-|:-|
 |omsls     |不应该自己启动的核心脚本|
@@ -60,9 +63,10 @@ git pull
   - 提示：使用littleskin版本需要在上级目录放置authlib-injector.jar
 
 # 学习参考
-- <a target="_blank" href="https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft">Aikar's Flags</a>
-- <a target="_blank" href="https://github.com/YouHaveTrouble/minecraft-optimization">YouHaveTrouble/minecraft-optimization</a>
-- <a target="_blank" href="https://flags.sh">flags.sh</a>
+
+- <a href="https://aikar.co/2018/07/02/tuning-the-jvm-g1gc-garbage-collector-flags-for-minecraft">Aikar's Flags</a>
+- <a href="https://github.com/YouHaveTrouble/minecraft-optimization">YouHaveTrouble/minecraft-optimization</a>
+- <a href="https://flags.sh">flags.sh</a>
 - 群友大佬提供的参数
 
 # 经验总结建议
@@ -76,7 +80,7 @@ git pull
 
   - 其实Java17也可以用ZGC，但由于不能分代，每一次GC都等价于Full GC，对性能消耗比较大，所以我放弃了Java17开启ZGC
 
-  - 关于TPS消耗：可以使用<a target="_blank" href="https://spark.lucko.me/download">spark</a>采集并导出插件/MOD占用耗时堆栈图，找出tick占用高的堆栈顺序里最先出现的插件/模组，然后怎么办不用我说（）
+  - 关于TPS消耗：可以使用<a href="https://spark.lucko.me/download">spark</a>采集并导出插件/MOD占用耗时堆栈图，找出tick占用高的堆栈顺序里最先出现的插件/模组，然后怎么办不用我说（）
 
 # 无用的吐槽
 
