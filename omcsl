@@ -1,0 +1,61 @@
+#!/bin/bash
+#cmd arg: <jar> <Xmx>
+#env arg: [JAVA_BIN]
+
+shell_dir=$(cd $(dirname $0); pwd)
+if [[ "$JAVA_BIN" == "" ]]; then
+  JAVA_BIN=java
+fi
+
+if [[ "$JAVA_VER" == "" ]]; then if [[ '$($JAVA_BIN --version 2>nul | grep "build 21")' != "" ]]; then JAVA_VER=21; fi; fi
+if [[ "$JAVA_VER" == "" ]]; then if [[ '$($JAVA_BIN --version 2>nul | grep "build 17")' != "" ]]; then JAVA_VER=17; fi; fi
+if [[ "$JAVA_VER" == "" ]]; then if [[ '$($JAVA_BIN --version 2>nul | grep "build 11")' != "" ]]; then JAVA_VER=11; fi; fi
+if [[ "$JAVA_VER" == "" ]]; then if [[ '$($JAVA_BIN --version 2>nul | grep "build 8")'  != "" ]]; then JAVA_VER=8;  fi; fi
+if [[ "$JAVA_VER" == "" ]]; then JAVA_VER=8; fi
+
+JAVA_OPTS=
+# "-XX:+UseLargePages"
+
+if [[ $JAVA_VER -ge 21 ]]; then if [[ "$OMCSL_GC_FLAGS" == "" ]]; then
+  OMCSL_GC_FLAGS=$shell_dir/flags/zgc.txt
+fi; fi
+
+if [[ $JAVA_VER -ge 17 ]]; then
+  JAVA_OPTS="--add-modules=jdk.incubator.vector $JAVA_OPTS"
+fi
+
+if [[ $JAVA_VER -le 17 ]]; then if [[ "$OMCSL_GC_FLAGS" == "" ]]; then
+  mem_unit=${2:0-1:1}
+  mem_amount=${2%$mem_unit}
+  
+
+  OMCSL_GC_FLAGS=$shell_dir/flags/g1gc.txt
+  if [[ "${mem_unit^}" == "G" ]]; then
+    if [[ $mem_amount -gt 12 ]]; then    OMCSL_GC_FLAGS=$shell_dir/flags/g1gc.higher.txt; fi
+  fi
+  if [[ "${mem_unit^}" == "M" ]]; then
+    if [[ $mem_amount -gt 12000 ]]; then OMCSL_GC_FLAGS=$shell_dir/flags/g1gc.higher.txt; fi
+    if [[ $mem_amount -lt 250 ]]; then
+      echo [OMCSL][ERROR]: Xmx \< 250M
+      exit
+    fi
+  fi
+fi; fi
+
+if [[ "$JAVA_VER" == "8" ]]; then
+  if [[ "$OMCSL_YGGDRASIL_FLAGS" == "" ]]; then export OMCSL_YGGDRASIL_FLAGS="/dev/null"; fi
+  JAVA_OPTS="$(<$OMCSL_GC_FLAGS) $(<$OMCSL_YGGDRASIL_FLAGS) $JAVA_OPTS"
+else
+  if [[ "$OMCSL_YGGDRASIL_FLAGS" != "" ]]; then export OMCSL_YGGDRASIL_FLAGS="@$OMCSL_YGGDRASIL_FLAGS"; fi
+  JAVA_OPTS="@$OMCSL_GC_FLAGS $OMCSL_YGGDRASIL_FLAGS $JAVA_OPTS"
+fi
+
+if [[ "$OMCSL_DEBUG" == "1" ]]; then
+  JAVA_OPTS="$JAVA_OPTS -XX:-PerfDisableSharedMem"
+  echo ==============================
+  echo JAVA_VER=$JAVA_VER
+  echo $JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS -jar $1 --nogui
+  echo ==============================
+fi
+export OMCSL_YGGDRASIL_FLAGS=
+$JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS -jar $1 --nogui
