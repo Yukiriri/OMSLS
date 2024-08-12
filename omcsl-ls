@@ -3,5 +3,5 @@
 #env arg: [JAVA_BIN]
 
 shell_dir=$(cd $(dirname $0); pwd)
-export OMSLS_YGGDRASIL_FLAGS=$shell_dir/flags/yggdrasil.txt
+export OMCSL_YGGDRASIL_FLAGS=$shell_dir/flags/yggdrasil.txt
 $shell_dir/omcsl $1 $2
