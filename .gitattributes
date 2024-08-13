@@ -1,6 +1,5 @@
 # Auto detect text files and perform LF normalization
-*       text eol=LF
-*.*     text eol=LF
-*.bat   text eol=CRLF
+**      text eol=lf
+*.bat   text eol=crlf
 *.jpg   binary
 *.png   binary
