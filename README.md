@@ -1,8 +1,6 @@
 <div align="center">
 
 # OMCSL
-目前脚本功能没有问题，但有一个重要的git clone问题在解决<br/>
-如果你想现在开始使用，你需要在git clone后把仓库文件当中txt后缀文件和linux sh文件的行尾换为LF<br/>
 
 </div>
 
