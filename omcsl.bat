@@ -50,11 +50,17 @@ if %JAVA_VER% EQU 8 (
 )
 
 
-if "%OMCSL_DEBUG%" == "1" (
+if not "%OMCSL_DEBUG%" == "" if %OMCSL_DEBUG% GEQ 3 (
   set JAVA_OPTS=%JAVA_OPTS% -XX:-PerfDisableSharedMem
-  echo ==============================
-  echo JAVA_VER=%JAVA_VER%
-  echo %JAVA_BIN% -Xms%2 -Xmx%2 !JAVA_OPTS! -jar %1 --nogui
-  echo ==============================
+)
+if not "%OMCSL_DEBUG%" == "" if %OMCSL_DEBUG% GEQ 2 (
+  set JAVA_OPTS=%JAVA_OPTS% -XX:+PrintFlagsFinal
+)
+if not "%OMCSL_DEBUG%" == "" if %OMCSL_DEBUG% GEQ 1 (
+  echo [OMCSL][DEBUG]: JAVA_BIN=%JAVA_BIN%
+  echo [OMCSL][DEBUG]: JAVA_VER=%JAVA_VER%
+  echo [OMCSL][DEBUG]: jar=%1
+  echo [OMCSL][DEBUG]: Xmx=%2
+  echo [OMCSL][DEBUG]: JAVA_OPTS=%JAVA_OPTS%
 )
 %JAVA_BIN% -Xms%2 -Xmx%2 %JAVA_OPTS% -jar %1 --nogui
