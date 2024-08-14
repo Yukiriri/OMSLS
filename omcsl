@@ -21,7 +21,7 @@ if [[ $JAVA_VER -ge 21 && "$OMCSL_GC_FLAGS" == "" ]]; then
 fi
 
 if [[ $JAVA_VER -ge 17 ]]; then
-  JAVA_OPTS="--add-modules=jdk.incubator.vector $JAVA_OPTS"
+  JAVA_OPTS+=" --add-modules=jdk.incubator.vector"
 fi
 
 if [[ $JAVA_VER -le 17 && "$OMCSL_GC_FLAGS" == "" ]]; then
@@ -50,18 +50,20 @@ else
   JAVA_OPTS="@$OMCSL_GC_FLAGS $OMCSL_YGGDRASIL_FLAGS $JAVA_OPTS"
 fi
 
-if [[ "$OMCSL_DEBUG" != "" && $OMCSL_DEBUG -ge 3 ]]; then
-  JAVA_OPTS="$JAVA_OPTS -XX:-PerfDisableSharedMem"
-fi
-if [[ "$OMCSL_DEBUG" != "" && $OMCSL_DEBUG -ge 2 ]]; then
-  JAVA_OPTS="$JAVA_OPTS -XX:+PrintFlagsFinal"
-fi
-if [[ "$OMCSL_DEBUG" != "" && $OMCSL_DEBUG -ge 1 ]]; then
-  echo [OMCSL][DEBUG]: JAVA_BIN=$JAVA_BIN
-  echo [OMCSL][DEBUG]: JAVA_VER=$JAVA_VER
-  echo [OMCSL][DEBUG]: jar=$1
-  echo [OMCSL][DEBUG]: Xmx=$2
-  echo [OMCSL][DEBUG]: JAVA_OPTS=$JAVA_OPTS
+if [[ "$OMCSL_DEBUG" != "" ]]; then
+  if [[ $OMCSL_DEBUG -ge 3 ]]; then
+    JAVA_OPTS+=" -XX:-PerfDisableSharedMem"
+  fi
+  if [[ $OMCSL_DEBUG -ge 2 ]]; then
+    JAVA_OPTS+=" -XX:+PrintFlagsFinal"
+  fi
+  if [[ $OMCSL_DEBUG -ge 1 ]]; then
+    echo [OMCSL][DEBUG]: JAVA_BIN=$JAVA_BIN
+    echo [OMCSL][DEBUG]: JAVA_VER=$JAVA_VER
+    echo [OMCSL][DEBUG]: jar=$1
+    echo [OMCSL][DEBUG]: Xmx=$2
+    echo [OMCSL][DEBUG]: JAVA_OPTS=$JAVA_OPTS
+  fi
 fi
 export OMCSL_YGGDRASIL_FLAGS=
 $JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS -jar $1 --nogui

@@ -46,21 +46,23 @@ if %JAVA_VER% EQU 8 (
   for /f %%i in (%OMCSL_GC_FLAGS% %OMCSL_YGGDRASIL_FLAGS%) do (set JAVA_OPTS=!JAVA_OPTS! %%i)
 ) else (
   if not "%OMCSL_YGGDRASIL_FLAGS%" == "" set OMCSL_YGGDRASIL_FLAGS=@%OMCSL_YGGDRASIL_FLAGS%
-  set JAVA_OPTS=@%OMCSL_GC_FLAGS% !OMCSL_YGGDRASIL_FLAGS! !JAVA_OPTS!
+  set JAVA_OPTS=@%OMCSL_GC_FLAGS% !OMCSL_YGGDRASIL_FLAGS! %JAVA_OPTS%
 )
 
 
-if not "%OMCSL_DEBUG%" == "" if %OMCSL_DEBUG% GEQ 3 (
-  set JAVA_OPTS=%JAVA_OPTS% -XX:-PerfDisableSharedMem
-)
-if not "%OMCSL_DEBUG%" == "" if %OMCSL_DEBUG% GEQ 2 (
-  set JAVA_OPTS=%JAVA_OPTS% -XX:+PrintFlagsFinal
-)
-if not "%OMCSL_DEBUG%" == "" if %OMCSL_DEBUG% GEQ 1 (
-  echo [OMCSL][DEBUG]: JAVA_BIN=%JAVA_BIN%
-  echo [OMCSL][DEBUG]: JAVA_VER=%JAVA_VER%
-  echo [OMCSL][DEBUG]: jar=%1
-  echo [OMCSL][DEBUG]: Xmx=%2
-  echo [OMCSL][DEBUG]: JAVA_OPTS=%JAVA_OPTS%
+if not "%OMCSL_DEBUG%" == "" (
+  if %OMCSL_DEBUG% GEQ 3 (
+    set JAVA_OPTS=%JAVA_OPTS% -XX:-PerfDisableSharedMem
+  )
+  if %OMCSL_DEBUG% GEQ 2 (
+    set JAVA_OPTS=%JAVA_OPTS% -XX:+PrintFlagsFinal
+  )
+  if %OMCSL_DEBUG% GEQ 1 (
+    echo [OMCSL][DEBUG]: JAVA_BIN=%JAVA_BIN%
+    echo [OMCSL][DEBUG]: JAVA_VER=%JAVA_VER%
+    echo [OMCSL][DEBUG]: jar=%1
+    echo [OMCSL][DEBUG]: Xmx=%2
+    echo [OMCSL][DEBUG]: JAVA_OPTS=!JAVA_OPTS!
+  )
 )
 %JAVA_BIN% -Xms%2 -Xmx%2 %JAVA_OPTS% -jar %1 --nogui
