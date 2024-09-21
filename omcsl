@@ -7,14 +7,25 @@ if [[ "$JAVA_BIN" == "" ]]; then
   JAVA_BIN=java
 fi
 
-if [[ "$JAVA_VER" == "" && '$($JAVA_BIN --version 2>nul | grep "build 21")' != "" ]]; then JAVA_VER=21; fi
-if [[ "$JAVA_VER" == "" && '$($JAVA_BIN --version 2>nul | grep "build 17")' != "" ]]; then JAVA_VER=17; fi
-if [[ "$JAVA_VER" == "" && '$($JAVA_BIN --version 2>nul | grep "build 11")' != "" ]]; then JAVA_VER=11; fi
-if [[ "$JAVA_VER" == "" && '$($JAVA_BIN --version 2>nul | grep "build 8")'  != "" ]]; then JAVA_VER=8;  fi
+if [[ "$JAVA_VER" == "" ]]; then 
+  v=$($JAVA_BIN --version 2>/dev/null | grep "build")
+  if [[ $(echo $v | grep "build 21") != "" ]]; then JAVA_VER=21; fi
+  if [[ $(echo $v | grep "build 17") != "" ]]; then JAVA_VER=17; fi
+  if [[ $(echo $v | grep "build 11") != "" ]]; then JAVA_VER=11; fi
+fi
 if [[ "$JAVA_VER" == "" ]]; then JAVA_VER=8; fi
 
-JAVA_OPTS=
-# "-XX:+UseLargePages"
+core_count=$(cat /proc/cpuinfo | grep "processor" | wc -l)
+JAVA_OPTS="-XX:ConcGCThreads=$core_count -XX:ParallelGCThreads=$core_count"
+
+
+mem_unit=${2:0-1:1}
+mem_amount=${2%$mem_unit}
+
+
+if [[ "${mem_unit^}" == "G" ]]; then soft_max_heap_size="$(($mem_amount*1024/4*3))"; fi
+if [[ "${mem_unit^}" == "M" ]]; then soft_max_heap_size="$(($mem_amount/4*3))"; fi
+JAVA_OPTS+=" -XX:SoftMaxHeapSize=$soft_max_heap_size""M"
 
 if [[ $JAVA_VER -ge 21 && "$OMCSL_GC_FLAGS" == "" ]]; then
   OMCSL_GC_FLAGS=$shell_dir/flags/zgc.txt
@@ -25,10 +36,6 @@ if [[ $JAVA_VER -ge 17 ]]; then
 fi
 
 if [[ $JAVA_VER -le 17 && "$OMCSL_GC_FLAGS" == "" ]]; then
-  mem_unit=${2:0-1:1}
-  mem_amount=${2%$mem_unit}
-  
-
   OMCSL_GC_FLAGS=$shell_dir/flags/g1gc.txt
   if [[ "${mem_unit^}" == "G" ]]; then
     if [[ $mem_amount -gt 12 ]]; then    OMCSL_GC_FLAGS=$shell_dir/flags/g1gc.higher.txt; fi
@@ -51,18 +58,19 @@ else
 fi
 
 if [[ "$OMCSL_DEBUG" != "" ]]; then
-  if [[ $OMCSL_DEBUG -ge 3 ]]; then
+  if [[ $OMCSL_DEBUG -ge 2 ]]; then
     JAVA_OPTS+=" -XX:-PerfDisableSharedMem"
   fi
-  if [[ $OMCSL_DEBUG -ge 2 ]]; then
-    JAVA_OPTS+=" -XX:+PrintFlagsFinal"
-  fi
   if [[ $OMCSL_DEBUG -ge 1 ]]; then
-    echo [OMCSL][DEBUG]: JAVA_BIN=$JAVA_BIN
-    echo [OMCSL][DEBUG]: JAVA_VER=$JAVA_VER
-    echo [OMCSL][DEBUG]: jar=$1
-    echo [OMCSL][DEBUG]: Xmx=$2
-    echo [OMCSL][DEBUG]: JAVA_OPTS=$JAVA_OPTS
+    echo --------------------------------------------------
+    echo [OMCSL][DEBUG]: JAVA_BIN  = $JAVA_BIN
+    echo [OMCSL][DEBUG]: JAVA_VER  = $JAVA_VER
+    echo [OMCSL][DEBUG]: jar       = $1
+    echo [OMCSL][DEBUG]: Xmx       = $2
+    echo [OMCSL][DEBUG]: JAVA_OPTS = $JAVA_OPTS
+    echo --------------------------------------------------
+    $JAVA_BIN -Xmx$2 $JAVA_OPTS -XX:+PrintFlagsFinal 2>nul | grep "command line"
+    echo --------------------------------------------------
   fi
 fi
 export OMCSL_YGGDRASIL_FLAGS=

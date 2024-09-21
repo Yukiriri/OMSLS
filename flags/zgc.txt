@@ -12,4 +12,3 @@
 -XX:+UseZGC
 -XX:-ZProactive
 -XX:+ZGenerational
--XX:ZCollectionIntervalMinor=6
