@@ -57,21 +57,21 @@ if %JAVA_VER% EQU 8 (
 )
 
 
-if not "%OMCSL_DEBUG%" == "" (
-  if %OMCSL_DEBUG% GEQ 2 (
-    set JAVA_OPTS=!JAVA_OPTS! -XX:-PerfDisableSharedMem
-  )
-  if %OMCSL_DEBUG% GEQ 1 (
-    echo --------------------------------------------------
-    echo [OMCSL][DEBUG]: JAVA_BIN  = %JAVA_BIN%
-    echo [OMCSL][DEBUG]: JAVA_VER  = %JAVA_VER%
-    echo [OMCSL][DEBUG]: jar       = %1
-    echo [OMCSL][DEBUG]: Xmx       = %2
-    echo [OMCSL][DEBUG]: JAVA_OPTS = !JAVA_OPTS!
-    echo --------------------------------------------------
-    %JAVA_BIN% -Xmx%2 !JAVA_OPTS! -XX:+PrintFlagsFinal 2>nul | findstr /C:"command line"
-    echo --------------------------------------------------
-  )
+if "%OMCSL_DEBUG%" == "" (
+  set OMCSL_DEBUG=0
 )
-
+if %OMCSL_DEBUG% GEQ 2 (
+  set JAVA_OPTS=!JAVA_OPTS! -XX:-PerfDisableSharedMem
+)
+if %OMCSL_DEBUG% GEQ 1 (
+  echo --------------------------------------------------
+  echo [OMCSL][DEBUG]: JAVA_BIN  = %JAVA_BIN%
+  echo [OMCSL][DEBUG]: JAVA_VER  = %JAVA_VER%
+  echo [OMCSL][DEBUG]: jar       = %1
+  echo [OMCSL][DEBUG]: Xmx       = %2
+  echo [OMCSL][DEBUG]: JAVA_OPTS = !JAVA_OPTS!
+  echo --------------------------------------------------
+  %JAVA_BIN% -Xmx%2 !JAVA_OPTS! -XX:+PrintFlagsFinal 2>nul | findstr /C:"command line"
+  echo --------------------------------------------------
+)
 %JAVA_BIN% -Xms%2 -Xmx%2 %JAVA_OPTS% -jar %1 --nogui
