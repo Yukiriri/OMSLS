@@ -57,21 +57,22 @@ else
   JAVA_OPTS="@$OMCSL_GC_FLAGS $OMCSL_YGGDRASIL_FLAGS $JAVA_OPTS"
 fi
 
-if [[ "$OMCSL_DEBUG" != "" ]]; then
-  if [[ $OMCSL_DEBUG -ge 2 ]]; then
-    JAVA_OPTS+=" -XX:-PerfDisableSharedMem"
-  fi
-  if [[ $OMCSL_DEBUG -ge 1 ]]; then
-    echo --------------------------------------------------
-    echo [OMCSL][DEBUG]: JAVA_BIN  = $JAVA_BIN
-    echo [OMCSL][DEBUG]: JAVA_VER  = $JAVA_VER
-    echo [OMCSL][DEBUG]: jar       = $1
-    echo [OMCSL][DEBUG]: Xmx       = $2
-    echo [OMCSL][DEBUG]: JAVA_OPTS = $JAVA_OPTS
-    echo --------------------------------------------------
-    $JAVA_BIN -Xmx$2 $JAVA_OPTS -XX:+PrintFlagsFinal 2>/dev/null | grep "command line"
-    echo --------------------------------------------------
-  fi
+if [[ "$OMCSL_DEBUG" == "" ]]; then
+  OMCSL_DEBUG=0
+fi
+if [[ $OMCSL_DEBUG -ge 2 ]]; then
+  JAVA_OPTS+=" -XX:-PerfDisableSharedMem"
+fi
+if [[ $OMCSL_DEBUG -ge 1 ]]; then
+  echo --------------------------------------------------
+  echo [OMCSL][DEBUG]: JAVA_BIN  = $JAVA_BIN
+  echo [OMCSL][DEBUG]: JAVA_VER  = $JAVA_VER
+  echo [OMCSL][DEBUG]: jar       = $1
+  echo [OMCSL][DEBUG]: Xmx       = $2
+  echo [OMCSL][DEBUG]: JAVA_OPTS = $JAVA_OPTS
+  echo --------------------------------------------------
+  $JAVA_BIN -Xmx$2 $JAVA_OPTS -XX:+PrintFlagsFinal 2>/dev/null | grep "command line"
+  echo --------------------------------------------------
 fi
 export OMCSL_YGGDRASIL_FLAGS=
 $JAVA_BIN -Xms$2 -Xmx$2 $JAVA_OPTS -jar $1 --nogui
