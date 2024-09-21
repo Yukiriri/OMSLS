@@ -69,7 +69,7 @@ if [[ "$OMCSL_DEBUG" != "" ]]; then
     echo [OMCSL][DEBUG]: Xmx       = $2
     echo [OMCSL][DEBUG]: JAVA_OPTS = $JAVA_OPTS
     echo --------------------------------------------------
-    $JAVA_BIN -Xmx$2 $JAVA_OPTS -XX:+PrintFlagsFinal 2>nul | grep "command line"
+    $JAVA_BIN -Xmx$2 $JAVA_OPTS -XX:+PrintFlagsFinal 2>/dev/null | grep "command line"
     echo --------------------------------------------------
   fi
 fi
