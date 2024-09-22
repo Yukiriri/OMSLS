@@ -22,12 +22,12 @@
 <a href="https://bell-sw.com/pages/downloads/">Liberica JDK</a>
 <a href="https://www.azul.com/downloads/?package=jdk#zulu">Zulu JDK</a>
 
-# 效果对比
+# 效果参考
 
 - G1GC
-  ![](https://github.com/Yukiriri/OMCSL/blob/main/res/visualvm_g1gc.png?raw=true)
+  ![](https://github.com/Yukiriri/OMCSL/blob/main/res/vanilla_g1gc.png?raw=true)
 - ZGC
-  ![](https://github.com/Yukiriri/OMCSL/blob/main/res/visualvm_zgc.png?raw=true)
+  ![](https://github.com/Yukiriri/OMCSL/blob/main/res/vanilla_zgc.png?raw=true)
 
 # 待实现功能
 
