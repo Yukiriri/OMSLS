@@ -38,10 +38,10 @@ if %JAVA_VER% GEQ 17 (
 if %JAVA_VER% LEQ 17 if "%OMCSL_GC_FLAGS%" == "" (
   set OMCSL_GC_FLAGS=%~dp0\flags\g1gc.txt
   if /i "!mem_unit!" == "G" (
-    if !mem_amount! GTR 12    set OMCSL_GC_FLAGS=%~dp0\flags\g1gc.higher.txt
+    if !mem_amount! GEQ 12    set OMCSL_GC_FLAGS=%~dp0\flags\g1gc.higher.txt
   )
   if /i "!mem_unit!" == "M" (
-    if !mem_amount! GTR 12000 set OMCSL_GC_FLAGS=%~dp0\flags\g1gc.higher.txt
+    if !mem_amount! GEQ 12000 set OMCSL_GC_FLAGS=%~dp0\flags\g1gc.higher.txt
     if !mem_amount! LSS 250 (
       echo [OMCSL][ERROR]: Xmx ^< 250M
       goto :EOF

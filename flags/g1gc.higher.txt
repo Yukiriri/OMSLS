@@ -22,5 +22,5 @@
 
 -XX:G1NewSizePercent=40
 -XX:G1MaxNewSizePercent=50
--XX:G1ReservePercent=20
+-XX:G1ReservePercent=15
 -XX:G1HeapRegionSize=16M

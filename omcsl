@@ -38,10 +38,10 @@ fi
 if [[ $JAVA_VER -le 17 && "$OMCSL_GC_FLAGS" == "" ]]; then
   OMCSL_GC_FLAGS=$shell_dir/flags/g1gc.txt
   if [[ "${mem_unit^}" == "G" ]]; then
-    if [[ $mem_amount -gt 12 ]]; then    OMCSL_GC_FLAGS=$shell_dir/flags/g1gc.higher.txt; fi
+    if [[ $mem_amount -ge 12 ]]; then    OMCSL_GC_FLAGS=$shell_dir/flags/g1gc.higher.txt; fi
   fi
   if [[ "${mem_unit^}" == "M" ]]; then
-    if [[ $mem_amount -gt 12000 ]]; then OMCSL_GC_FLAGS=$shell_dir/flags/g1gc.higher.txt; fi
+    if [[ $mem_amount -ge 12000 ]]; then OMCSL_GC_FLAGS=$shell_dir/flags/g1gc.higher.txt; fi
     if [[ $mem_amount -lt 250 ]]; then
       echo [OMCSL][ERROR]: Xmx \< 250M
       exit
