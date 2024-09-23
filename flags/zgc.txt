@@ -12,3 +12,4 @@
 -XX:+UseZGC
 -XX:-ZProactive
 -XX:+ZGenerational
+-XX:ZFragmentationLimit=15

@@ -12,9 +12,10 @@ if "%JAVA_VER%" == "" (
     for /f "delims=" %%v in ('echo %%b ^| findstr /C:"build 21"') do set JAVA_VER=21
     for /f "delims=" %%v in ('echo %%b ^| findstr /C:"build 17"') do set JAVA_VER=17
     for /f "delims=" %%v in ('echo %%b ^| findstr /C:"build 11"') do set JAVA_VER=11
+    for /f "delims=" %%v in ('echo %%b ^| findstr /C:"build 8"')  do set JAVA_VER=8
   )
 )
-if "%JAVA_VER%" == "" set JAVA_VER=8
+if "%JAVA_VER%" == "" echo [OMCSL][ERROR]: JAVA_BIN error && goto :EOF
 
 set JAVA_OPTS=-XX:ConcGCThreads=%NUMBER_OF_PROCESSORS% -XX:ParallelGCThreads=%NUMBER_OF_PROCESSORS%
 
@@ -23,29 +24,22 @@ set mem_amount=%2
 set mem_unit=%mem_amount:~-1%
 set mem_amount=%mem_amount:~0,-1%
 
-if /i "%mem_unit%" == "G" set /a soft_max_heap_size=%mem_amount%*1024/4*3 >nul
-if /i "%mem_unit%" == "M" set /a soft_max_heap_size=%mem_amount%/4*3 >nul
-set JAVA_OPTS=%JAVA_OPTS% -XX:SoftMaxHeapSize=%soft_max_heap_size%M
-
-if %JAVA_VER% GEQ 21 if "%OMCSL_GC_FLAGS%" == "" (
-  set OMCSL_GC_FLAGS=%~dp0\flags\zgc.txt
-)
+@REM if %JAVA_VER% GEQ 21 if "%OMCSL_GC_FLAGS%" == "" (
+@REM   set OMCSL_GC_FLAGS=%~dp0\flags\zgc.txt
+@REM   if /i "%mem_unit%" == "G" set /a soft_max_heap_size=%mem_amount%*1024/4*3 >nul
+@REM   if /i "%mem_unit%" == "M" set /a soft_max_heap_size=%mem_amount%/4*3 >nul
+@REM   set JAVA_OPTS=%JAVA_OPTS% -XX:SoftMaxHeapSize=!soft_max_heap_size!M
+@REM )
 
 if %JAVA_VER% GEQ 17 (
   set JAVA_OPTS=%JAVA_OPTS% --add-modules=jdk.incubator.vector
 )
 
-if %JAVA_VER% LEQ 17 if "%OMCSL_GC_FLAGS%" == "" (
+if %JAVA_VER% GEQ 8 if "%OMCSL_GC_FLAGS%" == "" (
   set OMCSL_GC_FLAGS=%~dp0\flags\g1gc.txt
-  if /i "!mem_unit!" == "G" (
-    if !mem_amount! GEQ 12    set OMCSL_GC_FLAGS=%~dp0\flags\g1gc.higher.txt
-  )
-  if /i "!mem_unit!" == "M" (
-    if !mem_amount! GEQ 12000 set OMCSL_GC_FLAGS=%~dp0\flags\g1gc.higher.txt
-    if !mem_amount! LSS 250 (
+  if /i "%mem_unit%" == "M" if %mem_amount% LSS 250 (
       echo [OMCSL][ERROR]: Xmx ^< 250M
       goto :EOF
-    )
   )
 )
 
@@ -74,4 +68,4 @@ if %OMCSL_DEBUG% GEQ 1 (
   %JAVA_BIN% -Xmx%2 !JAVA_OPTS! -XX:+PrintFlagsFinal 2>nul | findstr /C:"command line"
   echo --------------------------------------------------
 )
-%JAVA_BIN% -Xms%2 -Xmx%2 %JAVA_OPTS% -jar %1 --nogui
+%JAVA_BIN% -Xms%2 -Xmx%2 %JAVA_OPTS% -jar %1 nogui
