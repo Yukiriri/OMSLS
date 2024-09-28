@@ -15,7 +15,11 @@ if "%JAVA_VER%" == "" (
     for /f "delims=" %%v in ('echo %%b ^| findstr /C:"build 8"')  do set JAVA_VER=8
   )
 )
-if "%JAVA_VER%" == "" echo [OMCSL][ERROR]: JAVA_BIN error && goto :EOF
+if "%JAVA_VER%" == "" (
+  echo [OMCSL][ERROR]: JAVA_BIN error
+  goto :EOF
+)
+
 
 set JAVA_OPTS=-XX:ConcGCThreads=%NUMBER_OF_PROCESSORS% -XX:ParallelGCThreads=%NUMBER_OF_PROCESSORS%
 

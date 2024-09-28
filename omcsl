@@ -14,7 +14,11 @@ if [[ "$JAVA_VER" == "" ]]; then
   if [[ $(echo $v | grep "build 11") != "" ]]; then JAVA_VER=11; fi
   if [[ $(echo $v | grep "build 8")  != "" ]]; then JAVA_VER=8;  fi
 fi
-if [[ "$JAVA_VER" == "" ]]; then echo [OMCSL][ERROR]: JAVA_BIN error && exit; fi
+
+if [[ "$JAVA_VER" == "" ]]; then
+  echo [OMCSL][ERROR]: JAVA_BIN error
+  exit
+fi
 
 core_count=$(cat /proc/cpuinfo | grep "processor" | wc -l)
 JAVA_OPTS="-XX:ConcGCThreads=$core_count -XX:ParallelGCThreads=$core_count"
