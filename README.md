@@ -20,9 +20,14 @@ G1GC的研究已取得突破，等我这几天更新详解<br/>
 - ZGC
   ![](https://github.com/Yukiriri/OMCSL/blob/main/res/zgc.png?raw=true)
 
-# 待实现功能
+# 计划功能
 
 - 自动判断大页开关来启用透明大页
+- 提供3套侧重点：
+  - 平稳GC
+  - 低暂停GC
+  - 超低暂停GC（ZGC）
+- 适配高版本forge启动方式
 
 # 安装
 
