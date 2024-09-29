@@ -9,9 +9,9 @@ G1GC的研究已取得突破，等我这几天更新详解<br/>
 关于ZGC，就等以后慢慢研究吧（）<br/>
 
 推荐JDK：
-<a href="https://adoptium.net/zh-CN/temurin/releases/">Adoptium JDK</a>
-<a href="https://bell-sw.com/pages/downloads/">Liberica JDK</a>
-<a href="https://www.azul.com/downloads/?package=jdk#zulu">Zulu JDK</a>
+- <a href="https://adoptium.net/zh-CN/temurin/releases/">Adoptium JDK</a>
+- <a href="https://bell-sw.com/pages/downloads/">Liberica JDK</a>
+- <a href="https://www.azul.com/downloads/?package=jdk#zulu">Zulu JDK</a>
 
 # 效果参考
 
