@@ -16,9 +16,9 @@ G1GC的研究已取得突破，等我这几天更新详解<br/>
 # 效果参考
 
 - G1GC
-  ![](https://github.com/Yukiriri/OMCSL/blob/main/res/vanilla_g1gc.png?raw=true)
+  ![](https://github.com/Yukiriri/OMCSL/blob/main/res/g1gc.png?raw=true)
 - ZGC
-  ![](https://github.com/Yukiriri/OMCSL/blob/main/res/vanilla_zgc.png?raw=true)
+  ![](https://github.com/Yukiriri/OMCSL/blob/main/res/zgc.png?raw=true)
 
 # 待实现功能
 
